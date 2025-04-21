@@ -74,6 +74,8 @@ def read_csv_manually(filepath):
         
         # Parse rows
         data = []
+        inconsistent_rows = 0
+        
         for i, line in enumerate(lines[1:], 2):  # Start from line 2 (1-indexed)
             # Skip empty lines
             if not line.strip():
@@ -87,14 +89,19 @@ def read_csv_manually(filepath):
                 if len(row) < expected_fields:
                     # Add empty values for missing fields
                     row.extend([''] * (expected_fields - len(row)))
+                    inconsistent_rows += 1
                 elif len(row) > expected_fields:
                     # Truncate extra fields
-                    st.warning(f"Line {i} has {len(row)} fields (expected {expected_fields}). Extra fields will be truncated.")
                     row = row[:expected_fields]
+                    inconsistent_rows += 1
                 
                 data.append(row)
             except Exception as e:
                 st.warning(f"Skipping line {i} due to parsing error: {str(e)}")
+        
+        # Only show one summary warning instead of per-line warnings
+        if inconsistent_rows > 0:
+            st.info(f"Fixed {inconsistent_rows} rows with incorrect field counts (expected {expected_fields} fields).")
                 
         # Create DataFrame
         df = pd.DataFrame(data, columns=header)
