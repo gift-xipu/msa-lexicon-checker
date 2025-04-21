@@ -1,0 +1,121 @@
+word,meaning_correct,meaning_fix,word_sentiment,system_understands,understanding_correction,different_context,context_explanation,system_sentiment,system_intensity,prompt_type,example_sentence,timestamp,participant_id,language
+Mokgatlo,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Mokgatlo wa baswa o beakantše diphuthego tša go hlokomela tikologo.,2025-04-21 01:04:27,sepedi_20250421_010347,sepedi
+Kgorong,No,"kgorong means court, bodidi or motlhako is poverty",Negative,No,,No,,neutral,1,zero-shot,Kgorong ya sekolo e bulega ka iri ya borobedi mesong.,2025-04-21 01:05:24,sepedi_20250421_010347,sepedi
+tlwaelo,No,means being used to something,Neutral,No,,No,,neutral,1,zero-shot,Go bohlokwa go hlompha tlwaelo ya setšhaba se sengwe ge o etela mafelo a mafsa.,2025-04-21 01:05:55,sepedi_20250421_010347,sepedi
+nyamišwa,Yes,,Positive,Yes,,Yes,,negative,3,few-shot,Ke nyamišwa ke boitshwaro bja gagwe bjo bo sa hlomphegi.,2025-04-21 01:06:16,sepedi_20250421_010347,sepedi
+phethedišo,No,means outcome of something,Negative,No,,Yes,,neutral,1,few-shot,Phethedišo ya dipuku tša sekolo e dirwa ngwaga o mongwe le o mongwe go netefatša gore di a lekana.,2025-04-21 01:07:35,sepedi_20250421_010347,sepedi
+makgakga,Yes,,Positive,Yes,,Yes,,negative,3,zero-shot,Makgakga a mošomong a dirile gore re palelwe ke go fihlelela diphetho tše di holago.,2025-04-21 01:08:06,sepedi_20250421_010347,sepedi
+thakgala,Yes,means to be excited by,Positive,Yes,,Yes,,neutral,1,zero-shot,Thakgala ya diphoofolo tša naga e dirwa ka maikemišetšo a go šireletša mehutahuta ya diphedi.,2025-04-21 01:08:27,sepedi_20250421_010347,sepedi
+lethabo,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,Lethabo le tletše ka lapeng ge re be re keteka matswalo a mma.,2025-04-21 01:08:32,sepedi_20250421_010347,sepedi
+nyama,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Ke ratile go apea nama ya kgogo ka mokgwa wa setšo.,2025-04-21 01:08:36,sepedi_20250421_010347,sepedi
+mahlakahlaka,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Mahlakahlaka a dithaba a bontšha botse bja tlhago ye e sa hlwekago.,2025-04-21 01:08:47,sepedi_20250421_010347,sepedi
+kwatile,Yes,,Positive,Yes,,Yes,,negative,3,zero-shot,O kwatile ka lebaka la go se hlomphege ga gagwe.,2025-04-21 01:09:12,sepedi_20250421_010347,sepedi
+kgahlego,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,Kgahlego ya gagwe mo dithutong e mo thušitše go hwetša maemo a godimo sekolong.,2025-04-21 01:09:19,sepedi_20250421_010347,sepedi
+Tshireletso,Yes,means protection,Neutral,Yes,,Yes,,neutral,1,zero-shot,Tshireletso ya tikologo ke boikarabelo bja rena ka moka.,2025-04-21 01:10:24,sepedi_20250421_010347,sepedi
+thabo,Yes,,Positive,Yes,,Yes,,positive,3,zero-shot,Thabo o be a bonagala sefahlegong sa gagwe ge a amogela mpho ye kgolo.,2025-04-21 01:10:29,sepedi_20250421_010347,sepedi
+tšhoga,Yes,,Positive,Yes,,Yes,,negative,3,few-shot,Ke ile ka tšhoga ge ke ekwa ditaba tše mpe tša kotsi ya koloi.,2025-04-21 01:10:34,sepedi_20250421_010347,sepedi
+kwera,Yes,,Positive,Yes,,Yes,,negative,3,few-shot,O se ke wa kwera batho ka mantšu a go hloka tlhompho.,2025-04-21 01:10:50,sepedi_20250421_010347,sepedi
+kgalemo,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Moruti o ile a fa kgalemo go baithuti ka ga bohlokwa bja go hlompha nako.,2025-04-21 01:11:00,sepedi_20250421_010347,sepedi
+thabišo,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,Thabišo e tlišitše lethabo le legolo mo lapeng la rena ge a amogetše mpho ya gagwe.,2025-04-21 01:11:04,sepedi_20250421_010347,sepedi
+thabo,Yes,,Positive,Yes,,Yes,,positive,3,zero-shot,Thabo o be a bonagala sefahlegong sa gagwe ge a amogela mpho ye kgolo.,2025-04-21 09:34:07,sepedi_20250421_093358,sepedi
+thabo,Yes,,Positive,Yes,,Yes,,positive,3,zero-shot,Thabo o be a bonagala sefahlegong sa gagwe ge a amogela mpho ye kgolo.,2025-04-21 09:34:07,sepedi_20250421_093358,sepedi
+thabo,Yes,,Positive,Yes,,Yes,,positive,3,zero-shot,Thabo o be a bonagala sefahlegong sa gagwe ge a amogela mpho ye kgolo.,2025-04-21 09:34:07,sepedi_20250421_093358,sepedi
+thabo,Yes,,Positive,Yes,,Yes,,positive,3,zero-shot,Thabo o be a bonagala sefahlegong sa gagwe ge a amogela mpho ye kgolo.,2025-04-21 09:34:07,sepedi_20250421_093358,sepedi
+thabo,Yes,,Positive,Yes,,Yes,,positive,3,zero-shot,Thabo o be a bonagala sefahlegong sa gagwe ge a amogela mpho ye kgolo.,2025-04-21 09:34:07,sepedi_20250421_093358,sepedi
+thabo,Yes,,Positive,Yes,,Yes,,positive,3,zero-shot,Thabo o be a bonagala sefahlegong sa gagwe ge a amogela mpho ye kgolo.,2025-04-21 09:34:08,sepedi_20250421_093358,sepedi
+mahlakahlaka,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Mahlakahlaka a dithaba a bontšha botse bja tlhago ye e sa hlwekago.,2025-04-21 09:34:12,sepedi_20250421_093358,sepedi
+mahlakahlaka,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Mahlakahlaka a dithaba a bontšha botse bja tlhago ye e sa hlwekago.,2025-04-21 09:34:13,sepedi_20250421_093358,sepedi
+mahlakahlaka,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Mahlakahlaka a dithaba a bontšha botse bja tlhago ye e sa hlwekago.,2025-04-21 09:34:14,sepedi_20250421_093358,sepedi
+mahlakahlaka,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Mahlakahlaka a dithaba a bontšha botse bja tlhago ye e sa hlwekago.,2025-04-21 09:34:15,sepedi_20250421_093358,sepedi
+mahlakahlaka,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Mahlakahlaka a dithaba a bontšha botse bja tlhago ye e sa hlwekago.,2025-04-21 09:34:16,sepedi_20250421_093358,sepedi
+mahlakahlaka,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Mahlakahlaka a dithaba a bontšha botse bja tlhago ye e sa hlwekago.,2025-04-21 09:34:17,sepedi_20250421_093358,sepedi
+mahlakahlaka,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Mahlakahlaka a dithaba a bontšha botse bja tlhago ye e sa hlwekago.,2025-04-21 09:34:18,sepedi_20250421_093358,sepedi
+mahlakahlaka,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Mahlakahlaka a dithaba a bontšha botse bja tlhago ye e sa hlwekago.,2025-04-21 09:34:18,sepedi_20250421_093358,sepedi
+kwera,Yes,,Positive,Yes,,Yes,,negative,3,few-shot,O se ke wa kwera batho ka mantšu a go hloka tlhompho.,2025-04-21 09:34:33,sepedi_20250421_093358,sepedi
+thakgala,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Thakgala ya diphoofolo tša naga e dirwa ka maikemišetšo a go šireletša mehutahuta ya diphedi.,2025-04-21 09:34:38,sepedi_20250421_093358,sepedi
+phethedišo,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Phethedišo ya dipuku tša sekolo e dirwa ngwaga o mongwe le o mongwe go netefatša gore di a lekana.,2025-04-21 09:34:42,sepedi_20250421_093358,sepedi
+phethedišo,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Phethedišo ya dipuku tša sekolo e dirwa ngwaga o mongwe le o mongwe go netefatša gore di a lekana.,2025-04-21 09:34:43,sepedi_20250421_093358,sepedi
+kgalemo,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Moruti o ile a fa kgalemo go baithuti ka ga bohlokwa bja go hlompha nako.,2025-04-21 09:35:08,sepedi_20250421_093358,sepedi
+nyama,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Ke ratile go apea nama ya kgogo ka mokgwa wa setšo.,2025-04-21 09:35:25,sepedi_20250421_093358,sepedi
+nyama,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Ke ratile go apea nama ya kgogo ka mokgwa wa setšo.,2025-04-21 09:35:26,sepedi_20250421_093358,sepedi
+nyama,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Ke ratile go apea nama ya kgogo ka mokgwa wa setšo.,2025-04-21 09:35:27,sepedi_20250421_093358,sepedi
+kgahlego,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,Kgahlego ya gagwe mo dithutong e mo thušitše go hwetša maemo a godimo sekolong.,2025-04-21 09:35:52,sepedi_20250421_093358,sepedi
+nyamišwa,Yes,,Positive,Yes,,Yes,,negative,3,few-shot,Ke nyamišwa ke boitshwaro bja gagwe bjo bo sa hlomphegi.,2025-04-21 09:35:57,sepedi_20250421_093358,sepedi
+Tshireletso,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Tshireletso ya tikologo ke boikarabelo bja rena ka moka.,2025-04-21 09:36:13,sepedi_20250421_093358,sepedi
+kwatile,Yes,,Positive,Yes,,Yes,,negative,3,zero-shot,O kwatile ka lebaka la go se hlomphege ga gagwe.,2025-04-21 09:36:27,sepedi_20250421_093358,sepedi
+makgakga,Yes,,Positive,Yes,,Yes,,negative,3,zero-shot,Makgakga a mošomong a dirile gore re palelwe ke go fihlelela diphetho tše di holago.,2025-04-21 09:36:39,sepedi_20250421_093358,sepedi
+thabišo,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,Thabišo e tlišitše lethabo le legolo mo lapeng la rena ge a amogetše mpho ya gagwe.,2025-04-21 09:36:47,sepedi_20250421_093358,sepedi
+tšhoga,Yes,,Positive,Yes,,Yes,,negative,3,few-shot,Ke ile ka tšhoga ge ke ekwa ditaba tše mpe tša kotsi ya koloi.,2025-04-21 09:36:51,sepedi_20250421_093358,sepedi
+tlwaelo,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Go bohlokwa go hlompha tlwaelo ya setšhaba se sengwe ge o etela mafelo a mafsa.,2025-04-21 09:37:00,sepedi_20250421_093358,sepedi
+lethabo,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,Lethabo le tletše ka lapeng ge re be re keteka matswalo a mma.,2025-04-21 09:37:03,sepedi_20250421_093358,sepedi
+Kgorong,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Kgorong ya sekolo e bulega ka iri ya borobedi mesong.,2025-04-21 09:37:11,sepedi_20250421_093358,sepedi
+Mokgatlo,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Mokgatlo wa baswa o beakantše diphuthego tša go hlokomela tikologo.,2025-04-21 09:37:35,sepedi_20250421_093358,sepedi
+thabo,Yes,,Positive,Yes,,Yes,,positive,3,zero-shot,Thabo o be a bonagala sefahlegong sa gagwe ge a amogela mpho ye kgolo.,2025-04-21 09:34:07,sepedi_20250421_093358,sepedi
+thabo,Yes,,Positive,Yes,,Yes,,positive,3,zero-shot,Thabo o be a bonagala sefahlegong sa gagwe ge a amogela mpho ye kgolo.,2025-04-21 09:34:07,sepedi_20250421_093358,sepedi
+thabo,Yes,,Positive,Yes,,Yes,,positive,3,zero-shot,Thabo o be a bonagala sefahlegong sa gagwe ge a amogela mpho ye kgolo.,2025-04-21 09:34:07,sepedi_20250421_093358,sepedi
+thabo,Yes,,Positive,Yes,,Yes,,positive,3,zero-shot,Thabo o be a bonagala sefahlegong sa gagwe ge a amogela mpho ye kgolo.,2025-04-21 09:34:07,sepedi_20250421_093358,sepedi
+thabo,Yes,,Positive,Yes,,Yes,,positive,3,zero-shot,Thabo o be a bonagala sefahlegong sa gagwe ge a amogela mpho ye kgolo.,2025-04-21 09:34:07,sepedi_20250421_093358,sepedi
+thabo,Yes,,Positive,Yes,,Yes,,positive,3,zero-shot,Thabo o be a bonagala sefahlegong sa gagwe ge a amogela mpho ye kgolo.,2025-04-21 09:34:08,sepedi_20250421_093358,sepedi
+mahlakahlaka,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Mahlakahlaka a dithaba a bontšha botse bja tlhago ye e sa hlwekago.,2025-04-21 09:34:12,sepedi_20250421_093358,sepedi
+mahlakahlaka,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Mahlakahlaka a dithaba a bontšha botse bja tlhago ye e sa hlwekago.,2025-04-21 09:34:13,sepedi_20250421_093358,sepedi
+mahlakahlaka,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Mahlakahlaka a dithaba a bontšha botse bja tlhago ye e sa hlwekago.,2025-04-21 09:34:14,sepedi_20250421_093358,sepedi
+mahlakahlaka,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Mahlakahlaka a dithaba a bontšha botse bja tlhago ye e sa hlwekago.,2025-04-21 09:34:15,sepedi_20250421_093358,sepedi
+mahlakahlaka,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Mahlakahlaka a dithaba a bontšha botse bja tlhago ye e sa hlwekago.,2025-04-21 09:34:16,sepedi_20250421_093358,sepedi
+mahlakahlaka,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Mahlakahlaka a dithaba a bontšha botse bja tlhago ye e sa hlwekago.,2025-04-21 09:34:17,sepedi_20250421_093358,sepedi
+mahlakahlaka,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Mahlakahlaka a dithaba a bontšha botse bja tlhago ye e sa hlwekago.,2025-04-21 09:34:18,sepedi_20250421_093358,sepedi
+mahlakahlaka,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Mahlakahlaka a dithaba a bontšha botse bja tlhago ye e sa hlwekago.,2025-04-21 09:34:18,sepedi_20250421_093358,sepedi
+kwera,Yes,,Positive,Yes,,Yes,,negative,3,few-shot,O se ke wa kwera batho ka mantšu a go hloka tlhompho.,2025-04-21 09:34:33,sepedi_20250421_093358,sepedi
+thakgala,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Thakgala ya diphoofolo tša naga e dirwa ka maikemišetšo a go šireletša mehutahuta ya diphedi.,2025-04-21 09:34:38,sepedi_20250421_093358,sepedi
+phethedišo,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Phethedišo ya dipuku tša sekolo e dirwa ngwaga o mongwe le o mongwe go netefatša gore di a lekana.,2025-04-21 09:34:42,sepedi_20250421_093358,sepedi
+phethedišo,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Phethedišo ya dipuku tša sekolo e dirwa ngwaga o mongwe le o mongwe go netefatša gore di a lekana.,2025-04-21 09:34:43,sepedi_20250421_093358,sepedi
+kgalemo,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Moruti o ile a fa kgalemo go baithuti ka ga bohlokwa bja go hlompha nako.,2025-04-21 09:35:08,sepedi_20250421_093358,sepedi
+nyama,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Ke ratile go apea nama ya kgogo ka mokgwa wa setšo.,2025-04-21 09:35:25,sepedi_20250421_093358,sepedi
+nyama,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Ke ratile go apea nama ya kgogo ka mokgwa wa setšo.,2025-04-21 09:35:26,sepedi_20250421_093358,sepedi
+nyama,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Ke ratile go apea nama ya kgogo ka mokgwa wa setšo.,2025-04-21 09:35:27,sepedi_20250421_093358,sepedi
+kgahlego,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,Kgahlego ya gagwe mo dithutong e mo thušitše go hwetša maemo a godimo sekolong.,2025-04-21 09:35:52,sepedi_20250421_093358,sepedi
+nyamišwa,Yes,,Positive,Yes,,Yes,,negative,3,few-shot,Ke nyamišwa ke boitshwaro bja gagwe bjo bo sa hlomphegi.,2025-04-21 09:35:57,sepedi_20250421_093358,sepedi
+Tshireletso,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Tshireletso ya tikologo ke boikarabelo bja rena ka moka.,2025-04-21 09:36:13,sepedi_20250421_093358,sepedi
+kwatile,Yes,,Positive,Yes,,Yes,,negative,3,zero-shot,O kwatile ka lebaka la go se hlomphege ga gagwe.,2025-04-21 09:36:27,sepedi_20250421_093358,sepedi
+makgakga,Yes,,Positive,Yes,,Yes,,negative,3,zero-shot,Makgakga a mošomong a dirile gore re palelwe ke go fihlelela diphetho tše di holago.,2025-04-21 09:36:39,sepedi_20250421_093358,sepedi
+thabišo,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,Thabišo e tlišitše lethabo le legolo mo lapeng la rena ge a amogetše mpho ya gagwe.,2025-04-21 09:36:47,sepedi_20250421_093358,sepedi
+tšhoga,Yes,,Positive,Yes,,Yes,,negative,3,few-shot,Ke ile ka tšhoga ge ke ekwa ditaba tše mpe tša kotsi ya koloi.,2025-04-21 09:36:51,sepedi_20250421_093358,sepedi
+tlwaelo,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Go bohlokwa go hlompha tlwaelo ya setšhaba se sengwe ge o etela mafelo a mafsa.,2025-04-21 09:37:00,sepedi_20250421_093358,sepedi
+lethabo,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,Lethabo le tletše ka lapeng ge re be re keteka matswalo a mma.,2025-04-21 09:37:03,sepedi_20250421_093358,sepedi
+Kgorong,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Kgorong ya sekolo e bulega ka iri ya borobedi mesong.,2025-04-21 09:37:11,sepedi_20250421_093358,sepedi
+Mokgatlo,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Mokgatlo wa baswa o beakantše diphuthego tša go hlokomela tikologo.,2025-04-21 09:37:35,sepedi_20250421_093358,sepedi
+phethedišo,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Phethedišo ya dipuku tša sekolo e dirwa ngwaga o mongwe le o mongwe go netefatša gore di a lekana.,2025-04-21 09:41:03,sepedi_20250421_094101,sepedi
+lethabo,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,Lethabo le tletše ka lapeng ge re be re keteka matswalo a mma.,2025-04-21 09:41:04,sepedi_20250421_094101,sepedi
+kwatile,Yes,,Positive,Yes,,Yes,,negative,3,zero-shot,O kwatile ka lebaka la go se hlomphege ga gagwe.,2025-04-21 09:41:05,sepedi_20250421_094101,sepedi
+thabišo,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,Thabišo e tlišitše lethabo le legolo mo lapeng la rena ge a amogetše mpho ya gagwe.,2025-04-21 09:41:05,sepedi_20250421_094101,sepedi
+tšhoga,Yes,,Positive,Yes,,Yes,,negative,3,few-shot,Ke ile ka tšhoga ge ke ekwa ditaba tše mpe tša kotsi ya koloi.,2025-04-21 09:41:06,sepedi_20250421_094101,sepedi
+Tshireletso,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Tshireletso ya tikologo ke boikarabelo bja rena ka moka.,2025-04-21 09:41:06,sepedi_20250421_094101,sepedi
+nyama,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Ke ratile go apea nama ya kgogo ka mokgwa wa setšo.,2025-04-21 09:41:07,sepedi_20250421_094101,sepedi
+Kgorong,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Kgorong ya sekolo e bulega ka iri ya borobedi mesong.,2025-04-21 09:41:07,sepedi_20250421_094101,sepedi
+kgahlego,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,Kgahlego ya gagwe mo dithutong e mo thušitše go hwetša maemo a godimo sekolong.,2025-04-21 09:41:08,sepedi_20250421_094101,sepedi
+kwera,Yes,,Positive,Yes,,Yes,,negative,3,few-shot,O se ke wa kwera batho ka mantšu a go hloka tlhompho.,2025-04-21 09:41:10,sepedi_20250421_094101,sepedi
+kgalemo,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Moruti o ile a fa kgalemo go baithuti ka ga bohlokwa bja go hlompha nako.,2025-04-21 09:41:10,sepedi_20250421_094101,sepedi
+thabo,Yes,,Positive,Yes,,Yes,,positive,3,zero-shot,Thabo o be a bonagala sefahlegong sa gagwe ge a amogela mpho ye kgolo.,2025-04-21 09:41:11,sepedi_20250421_094101,sepedi
+thakgala,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Thakgala ya diphoofolo tša naga e dirwa ka maikemišetšo a go šireletša mehutahuta ya diphedi.,2025-04-21 09:41:11,sepedi_20250421_094101,sepedi
+tlwaelo,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Go bohlokwa go hlompha tlwaelo ya setšhaba se sengwe ge o etela mafelo a mafsa.,2025-04-21 09:41:12,sepedi_20250421_094101,sepedi
+makgakga,Yes,,Positive,Yes,,Yes,,negative,3,zero-shot,Makgakga a mošomong a dirile gore re palelwe ke go fihlelela diphetho tše di holago.,2025-04-21 09:41:13,sepedi_20250421_094101,sepedi
+Mokgatlo,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Mokgatlo wa baswa o beakantše diphuthego tša go hlokomela tikologo.,2025-04-21 09:41:13,sepedi_20250421_094101,sepedi
+mahlakahlaka,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Mahlakahlaka a dithaba a bontšha botse bja tlhago ye e sa hlwekago.,2025-04-21 09:41:14,sepedi_20250421_094101,sepedi
+nyamišwa,Yes,,Positive,Yes,,Yes,,negative,3,few-shot,Ke nyamišwa ke boitshwaro bja gagwe bjo bo sa hlomphegi.,2025-04-21 09:41:14,sepedi_20250421_094101,sepedi
+phethedišo,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Phethedišo ya dipuku tša sekolo e dirwa ngwaga o mongwe le o mongwe go netefatša gore di a lekana.,2025-04-21 09:41:03,sepedi_20250421_094101,sepedi
+lethabo,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,Lethabo le tletše ka lapeng ge re be re keteka matswalo a mma.,2025-04-21 09:41:04,sepedi_20250421_094101,sepedi
+kwatile,Yes,,Positive,Yes,,Yes,,negative,3,zero-shot,O kwatile ka lebaka la go se hlomphege ga gagwe.,2025-04-21 09:41:05,sepedi_20250421_094101,sepedi
+thabišo,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,Thabišo e tlišitše lethabo le legolo mo lapeng la rena ge a amogetše mpho ya gagwe.,2025-04-21 09:41:05,sepedi_20250421_094101,sepedi
+tšhoga,Yes,,Positive,Yes,,Yes,,negative,3,few-shot,Ke ile ka tšhoga ge ke ekwa ditaba tše mpe tša kotsi ya koloi.,2025-04-21 09:41:06,sepedi_20250421_094101,sepedi
+Tshireletso,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Tshireletso ya tikologo ke boikarabelo bja rena ka moka.,2025-04-21 09:41:06,sepedi_20250421_094101,sepedi
+nyama,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Ke ratile go apea nama ya kgogo ka mokgwa wa setšo.,2025-04-21 09:41:07,sepedi_20250421_094101,sepedi
+Kgorong,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Kgorong ya sekolo e bulega ka iri ya borobedi mesong.,2025-04-21 09:41:07,sepedi_20250421_094101,sepedi
+kgahlego,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,Kgahlego ya gagwe mo dithutong e mo thušitše go hwetša maemo a godimo sekolong.,2025-04-21 09:41:08,sepedi_20250421_094101,sepedi
+kwera,Yes,,Positive,Yes,,Yes,,negative,3,few-shot,O se ke wa kwera batho ka mantšu a go hloka tlhompho.,2025-04-21 09:41:10,sepedi_20250421_094101,sepedi
+kgalemo,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Moruti o ile a fa kgalemo go baithuti ka ga bohlokwa bja go hlompha nako.,2025-04-21 09:41:10,sepedi_20250421_094101,sepedi
+thabo,Yes,,Positive,Yes,,Yes,,positive,3,zero-shot,Thabo o be a bonagala sefahlegong sa gagwe ge a amogela mpho ye kgolo.,2025-04-21 09:41:11,sepedi_20250421_094101,sepedi
+thakgala,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Thakgala ya diphoofolo tša naga e dirwa ka maikemišetšo a go šireletša mehutahuta ya diphedi.,2025-04-21 09:41:11,sepedi_20250421_094101,sepedi
+tlwaelo,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Go bohlokwa go hlompha tlwaelo ya setšhaba se sengwe ge o etela mafelo a mafsa.,2025-04-21 09:41:12,sepedi_20250421_094101,sepedi
+makgakga,Yes,,Positive,Yes,,Yes,,negative,3,zero-shot,Makgakga a mošomong a dirile gore re palelwe ke go fihlelela diphetho tše di holago.,2025-04-21 09:41:13,sepedi_20250421_094101,sepedi
+Mokgatlo,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Mokgatlo wa baswa o beakantše diphuthego tša go hlokomela tikologo.,2025-04-21 09:41:13,sepedi_20250421_094101,sepedi
+mahlakahlaka,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Mahlakahlaka a dithaba a bontšha botse bja tlhago ye e sa hlwekago.,2025-04-21 09:41:14,sepedi_20250421_094101,sepedi
+nyamišwa,Yes,,Positive,Yes,,Yes,,negative,3,few-shot,Ke nyamišwa ke boitshwaro bja gagwe bjo bo sa hlomphegi.,2025-04-21 09:41:14,sepedi_20250421_094101,sepedi

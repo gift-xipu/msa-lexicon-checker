@@ -1,0 +1,11 @@
+# Save this as .streamlit/config.toml in your project directory
+
+[theme]
+primaryColor = "#ff4b4b"
+backgroundColor = "#121111"
+secondaryBackgroundColor = "#1a1a1a"
+textColor = "#c9d1d9"
+successColor = "#3fb950"
+warningColor = "#f0883e"
+errorColor = "#f85149"
+font = "sans serif"

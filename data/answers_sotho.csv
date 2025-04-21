@@ -1,0 +1,95 @@
+word,meaning_correct,meaning_fix,word_sentiment,system_understands,understanding_correction,different_context,context_explanation,system_sentiment,system_intensity,prompt_type,example_sentence,timestamp,participant_id,language
+mokgethwa,No,mokgethwa can mean chosen or MC or host,Neutral,No,,Yes,,neutral,1,zero-shot,Mokgethwa o rapela kereke hoseng ho hong le ho hong.,2025-04-21 09:16:02,sotho_20250421_091436,sotho
+tsebiso,Yes,,Neutral,Yes,,No,,neutral,1,zero-shot,Tsebiso ya kopano e tla etswa hosane ka nako ya leshome.,2025-04-21 09:16:22,sotho_20250421_091436,sotho
+kgathala,Yes,,Neutral,Yes,,Yes,,negative,3,few-shot,"Bana ba kgathala ho etsa mosebetsi wa sekolo, ba batla ho bapala feela.",2025-04-21 09:16:41,sotho_20250421_091436,sotho
+lerato,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Lerato o ile a bula lebenkele la hae la dibuka motseng wa habo.,2025-04-21 09:16:55,sotho_20250421_091436,sotho
+makatsa,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Pula e nele ka tsela e makatsa ka ha e ne e le selemo.,2025-04-21 09:17:15,sotho_20250421_091436,sotho
+nyahama,Yes,,Negative,Yes,,Yes,,neutral,1,few-shot,Ke nyahama ha ke bona batho ba hlekefetsang ba bang.,2025-04-21 09:17:52,sotho_20250421_091436,sotho
+ho hlonama,Yes,,Positive,Yes,,Yes,,negative,3,few-shot,Ke ile ka ho hlonama haholo ha ke utlwa ka tshenyeho ya ntate wa hao.,2025-04-21 09:18:08,sotho_20250421_091436,sotho
+thabo,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Thabo o ile a tsamaya ho ya sekolong hoseng.,2025-04-21 09:18:09,sotho_20250421_091436,sotho
+kgalefo,Yes,,Positive,Yes,,Yes,,negative,3,zero-shot,"Monna eo o ile a otla ngwana wa hae ka kgalefo e kgolo, e leng ntho e sa amoheleheng ho hang.",2025-04-21 09:18:09,sotho_20250421_091436,sotho
+monate,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,"Dijo tsa mme di monate haholo, ke ka hoo ke ratang ho ja lapeng.",2025-04-21 09:18:10,sotho_20250421_091436,sotho
+nyahama,Yes,,Negative,Yes,,Yes,,neutral,1,few-shot,Ke nyahama ha ke bona batho ba hlekefetsang ba bang.,2025-04-21 09:17:52,sotho_20250421_091436,sotho
+ho hlonama,Yes,,Positive,Yes,,Yes,,negative,3,few-shot,Ke ile ka ho hlonama haholo ha ke utlwa ka tshenyeho ya ntate wa hao.,2025-04-21 09:18:08,sotho_20250421_091436,sotho
+thabo,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Thabo o ile a tsamaya ho ya sekolong hoseng.,2025-04-21 09:18:09,sotho_20250421_091436,sotho
+kgalefo,Yes,,Positive,Yes,,Yes,,negative,3,zero-shot,"Monna eo o ile a otla ngwana wa hae ka kgalefo e kgolo, e leng ntho e sa amoheleheng ho hang.",2025-04-21 09:18:09,sotho_20250421_091436,sotho
+monate,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,"Dijo tsa mme di monate haholo, ke ka hoo ke ratang ho ja lapeng.",2025-04-21 09:18:10,sotho_20250421_091436,sotho
+monate,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,"Dijo tsa mme di monate haholo, ke ka hoo ke ratang ho ja lapeng.",2025-04-21 09:18:10,sotho_20250421_091436,sotho
+nyahama,Yes,,Negative,Yes,,Yes,,neutral,1,few-shot,Ke nyahama ha ke bona batho ba hlekefetsang ba bang.,2025-04-21 09:17:52,sotho_20250421_091436,sotho
+ho hlonama,Yes,,Positive,Yes,,Yes,,negative,3,few-shot,Ke ile ka ho hlonama haholo ha ke utlwa ka tshenyeho ya ntate wa hao.,2025-04-21 09:18:08,sotho_20250421_091436,sotho
+thabo,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Thabo o ile a tsamaya ho ya sekolong hoseng.,2025-04-21 09:18:09,sotho_20250421_091436,sotho
+kgalefo,Yes,,Positive,Yes,,Yes,,negative,3,zero-shot,"Monna eo o ile a otla ngwana wa hae ka kgalefo e kgolo, e leng ntho e sa amoheleheng ho hang.",2025-04-21 09:18:09,sotho_20250421_091436,sotho
+monate,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,"Dijo tsa mme di monate haholo, ke ka hoo ke ratang ho ja lapeng.",2025-04-21 09:18:10,sotho_20250421_091436,sotho
+monate,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,"Dijo tsa mme di monate haholo, ke ka hoo ke ratang ho ja lapeng.",2025-04-21 09:18:10,sotho_20250421_091436,sotho
+monate,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,"Dijo tsa mme di monate haholo, ke ka hoo ke ratang ho ja lapeng.",2025-04-21 09:18:10,sotho_20250421_091436,sotho
+nyahama,Yes,,Negative,Yes,,Yes,,neutral,1,few-shot,Ke nyahama ha ke bona batho ba hlekefetsang ba bang.,2025-04-21 09:17:52,sotho_20250421_091436,sotho
+ho hlonama,Yes,,Positive,Yes,,Yes,,negative,3,few-shot,Ke ile ka ho hlonama haholo ha ke utlwa ka tshenyeho ya ntate wa hao.,2025-04-21 09:18:08,sotho_20250421_091436,sotho
+thabo,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Thabo o ile a tsamaya ho ya sekolong hoseng.,2025-04-21 09:18:09,sotho_20250421_091436,sotho
+kgalefo,Yes,,Positive,Yes,,Yes,,negative,3,zero-shot,"Monna eo o ile a otla ngwana wa hae ka kgalefo e kgolo, e leng ntho e sa amoheleheng ho hang.",2025-04-21 09:18:09,sotho_20250421_091436,sotho
+monate,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,"Dijo tsa mme di monate haholo, ke ka hoo ke ratang ho ja lapeng.",2025-04-21 09:18:10,sotho_20250421_091436,sotho
+monate,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,"Dijo tsa mme di monate haholo, ke ka hoo ke ratang ho ja lapeng.",2025-04-21 09:18:10,sotho_20250421_091436,sotho
+monate,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,"Dijo tsa mme di monate haholo, ke ka hoo ke ratang ho ja lapeng.",2025-04-21 09:18:10,sotho_20250421_091436,sotho
+monate,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,"Dijo tsa mme di monate haholo, ke ka hoo ke ratang ho ja lapeng.",2025-04-21 09:18:10,sotho_20250421_091436,sotho
+nyahama,Yes,,Negative,Yes,,Yes,,neutral,1,few-shot,Ke nyahama ha ke bona batho ba hlekefetsang ba bang.,2025-04-21 09:17:52,sotho_20250421_091436,sotho
+ho hlonama,Yes,,Positive,Yes,,Yes,,negative,3,few-shot,Ke ile ka ho hlonama haholo ha ke utlwa ka tshenyeho ya ntate wa hao.,2025-04-21 09:18:08,sotho_20250421_091436,sotho
+thabo,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Thabo o ile a tsamaya ho ya sekolong hoseng.,2025-04-21 09:18:09,sotho_20250421_091436,sotho
+kgalefo,Yes,,Positive,Yes,,Yes,,negative,3,zero-shot,"Monna eo o ile a otla ngwana wa hae ka kgalefo e kgolo, e leng ntho e sa amoheleheng ho hang.",2025-04-21 09:18:09,sotho_20250421_091436,sotho
+monate,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,"Dijo tsa mme di monate haholo, ke ka hoo ke ratang ho ja lapeng.",2025-04-21 09:18:10,sotho_20250421_091436,sotho
+monate,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,"Dijo tsa mme di monate haholo, ke ka hoo ke ratang ho ja lapeng.",2025-04-21 09:18:10,sotho_20250421_091436,sotho
+monate,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,"Dijo tsa mme di monate haholo, ke ka hoo ke ratang ho ja lapeng.",2025-04-21 09:18:10,sotho_20250421_091436,sotho
+monate,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,"Dijo tsa mme di monate haholo, ke ka hoo ke ratang ho ja lapeng.",2025-04-21 09:18:10,sotho_20250421_091436,sotho
+monate,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,"Dijo tsa mme di monate haholo, ke ka hoo ke ratang ho ja lapeng.",2025-04-21 09:18:11,sotho_20250421_091436,sotho
+nyahama,Yes,,Negative,Yes,,Yes,,neutral,1,few-shot,Ke nyahama ha ke bona batho ba hlekefetsang ba bang.,2025-04-21 09:17:52,sotho_20250421_091436,sotho
+ho hlonama,Yes,,Positive,Yes,,Yes,,negative,3,few-shot,Ke ile ka ho hlonama haholo ha ke utlwa ka tshenyeho ya ntate wa hao.,2025-04-21 09:18:08,sotho_20250421_091436,sotho
+thabo,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Thabo o ile a tsamaya ho ya sekolong hoseng.,2025-04-21 09:18:09,sotho_20250421_091436,sotho
+kgalefo,Yes,,Positive,Yes,,Yes,,negative,3,zero-shot,"Monna eo o ile a otla ngwana wa hae ka kgalefo e kgolo, e leng ntho e sa amoheleheng ho hang.",2025-04-21 09:18:09,sotho_20250421_091436,sotho
+monate,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,"Dijo tsa mme di monate haholo, ke ka hoo ke ratang ho ja lapeng.",2025-04-21 09:18:10,sotho_20250421_091436,sotho
+monate,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,"Dijo tsa mme di monate haholo, ke ka hoo ke ratang ho ja lapeng.",2025-04-21 09:18:10,sotho_20250421_091436,sotho
+monate,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,"Dijo tsa mme di monate haholo, ke ka hoo ke ratang ho ja lapeng.",2025-04-21 09:18:10,sotho_20250421_091436,sotho
+monate,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,"Dijo tsa mme di monate haholo, ke ka hoo ke ratang ho ja lapeng.",2025-04-21 09:18:10,sotho_20250421_091436,sotho
+monate,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,"Dijo tsa mme di monate haholo, ke ka hoo ke ratang ho ja lapeng.",2025-04-21 09:18:11,sotho_20250421_091436,sotho
+monate,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,"Dijo tsa mme di monate haholo, ke ka hoo ke ratang ho ja lapeng.",2025-04-21 09:18:11,sotho_20250421_091436,sotho
+khotsofalo,Yes,,Positive,Yes,,Yes,,positive,3,zero-shot,Khotsofalo ya ho fihlela ditoro tsa hao e tla o tlisetsa thabo e sa feleng.,2025-04-21 09:19:46,sotho_20250421_091436,sotho
+khathatso,Yes,,Positive,Yes,,Yes,,negative,2,zero-shot,Khathatso ya ho hloka mosebetsi e etsa hore batho ba bangata ba wele mathateng a dikadimo.,2025-04-21 09:19:48,sotho_20250421_091436,sotho
+lekhotla,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Lekhotla la dinyewe le tla kopana hosane ho tshohla nyewe ya boshodu.,2025-04-21 09:19:49,sotho_20250421_091436,sotho
+bohloko,Yes,,Positive,Yes,,Yes,,negative,3,zero-shot,Ke utlwile bohloko ha ke bona batho ba hlokang dijo le bodulo.,2025-04-21 09:19:49,sotho_20250421_091436,sotho
+boiketlo,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,Batho ba bangata ba batla boiketlo ha ba kgetha dibaka tsa ho phomola.,2025-04-21 09:19:52,sotho_20250421_091436,sotho
+thutoea,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Thutoea ea bana e bohlokoa bakeng sa bokamoso ba naha ea rona.,2025-04-21 09:20:09,sotho_20250421_091436,sotho
+mahlomola,Yes,,Positive,Yes,,Yes,,negative,3,few-shot,Mahlomola a ka hae a mo etsa hore a se ke a kgona ho robala bosiu.,2025-04-21 09:20:12,sotho_20250421_091436,sotho
+makatsang,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,Ke bone ntho e makatsang ha ke ne ke tsamaya ka seterateng maobane.,2025-04-21 09:20:15,sotho_20250421_091436,sotho
+khotsofalo,Yes,,Positive,Yes,,Yes,,positive,3,zero-shot,2025-04-21 09:48:08,Khotsofalo ya ho fihlela ditoro tsa hao e tla o tlisetsa thabo e sa feleng.,sotho_20250421_094806,sotho
+nyahama,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,2025-04-21 09:48:08,Ke nyahama ha ke bona batho ba hlekefetsang ba bang.,sotho_20250421_094806,sotho
+lekhotla,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,2025-04-21 09:48:08,Lekhotla la dinyewe le tla kopana hosane ho tshohla nyewe ya boshodu.,sotho_20250421_094806,sotho
+makatsang,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,2025-04-21 09:48:09,Ke bone ntho e makatsang ha ke ne ke tsamaya ka seterateng maobane.,sotho_20250421_094806,sotho
+khathatso,Yes,,Positive,Yes,,Yes,,negative,2,zero-shot,2025-04-21 09:48:10,Khathatso ya ho hloka mosebetsi e etsa hore batho ba bangata ba wele mathateng a dikadimo.,sotho_20250421_094806,sotho
+tsebiso,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,2025-04-21 09:48:10,Tsebiso ya kopano e tla etswa hosane ka nako ya leshome.,sotho_20250421_094806,sotho
+mahlomola,Yes,,Positive,Yes,,Yes,,negative,3,few-shot,2025-04-21 09:48:10,Mahlomola a ka hae a mo etsa hore a se ke a kgona ho robala bosiu.,sotho_20250421_094806,sotho
+thabo,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,2025-04-21 09:48:11,Thabo o ile a tsamaya ho ya sekolong hoseng.,sotho_20250421_094806,sotho
+thutoea,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,2025-04-21 09:48:11,Thutoea ea bana e bohlokoa bakeng sa bokamoso ba naha ea rona.,sotho_20250421_094806,sotho
+makatsa,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,2025-04-21 09:48:12,Pula e nele ka tsela e makatsa ka ha e ne e le selemo.,sotho_20250421_094806,sotho
+kgathala,Yes,,Positive,Yes,,Yes,,negative,3,few-shot,2025-04-21 09:48:12,"Bana ba kgathala ho etsa mosebetsi wa sekolo, ba batla ho bapala feela.",sotho_20250421_094806,sotho
+monate,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,2025-04-21 09:48:13,"Dijo tsa mme di monate haholo, ke ka hoo ke ratang ho ja lapeng.",sotho_20250421_094806,sotho
+ho hlonama,Yes,,Positive,Yes,,Yes,,negative,3,few-shot,2025-04-21 09:48:15,Ke ile ka ho hlonama haholo ha ke utlwa ka tshenyeho ya ntate wa hao.,sotho_20250421_094806,sotho
+boiketlo,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,2025-04-21 09:48:16,Batho ba bangata ba batla boiketlo ha ba kgetha dibaka tsa ho phomola.,sotho_20250421_094806,sotho
+mokgethwa,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,2025-04-21 09:48:16,Mokgethwa o rapela kereke hoseng ho hong le ho hong.,sotho_20250421_094806,sotho
+lerato,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,2025-04-21 09:48:17,Lerato o ile a bula lebenkele la hae la dibuka motseng wa habo.,sotho_20250421_094806,sotho
+kgalefo,Yes,,Positive,Yes,,Yes,,negative,3,zero-shot,2025-04-21 09:48:17,"Monna eo o ile a otla ngwana wa hae ka kgalefo e kgolo, e leng ntho e sa amoheleheng ho hang.",sotho_20250421_094806,sotho
+bohloko,Yes,,Positive,Yes,,Yes,,negative,3,zero-shot,2025-04-21 09:48:18,Ke utlwile bohloko ha ke bona batho ba hlokang dijo le bodulo.,sotho_20250421_094806,sotho
+khotsofalo,Yes,,Positive,Yes,,Yes,,positive,3,zero-shot,2025-04-21 09:48:08,Khotsofalo ya ho fihlela ditoro tsa hao e tla o tlisetsa thabo e sa feleng.,sotho_20250421_094806,sotho
+nyahama,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,2025-04-21 09:48:08,Ke nyahama ha ke bona batho ba hlekefetsang ba bang.,sotho_20250421_094806,sotho
+lekhotla,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,2025-04-21 09:48:08,Lekhotla la dinyewe le tla kopana hosane ho tshohla nyewe ya boshodu.,sotho_20250421_094806,sotho
+makatsang,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,2025-04-21 09:48:09,Ke bone ntho e makatsang ha ke ne ke tsamaya ka seterateng maobane.,sotho_20250421_094806,sotho
+khathatso,Yes,,Positive,Yes,,Yes,,negative,2,zero-shot,2025-04-21 09:48:10,Khathatso ya ho hloka mosebetsi e etsa hore batho ba bangata ba wele mathateng a dikadimo.,sotho_20250421_094806,sotho
+tsebiso,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,2025-04-21 09:48:10,Tsebiso ya kopano e tla etswa hosane ka nako ya leshome.,sotho_20250421_094806,sotho
+mahlomola,Yes,,Positive,Yes,,Yes,,negative,3,few-shot,2025-04-21 09:48:10,Mahlomola a ka hae a mo etsa hore a se ke a kgona ho robala bosiu.,sotho_20250421_094806,sotho
+thabo,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,2025-04-21 09:48:11,Thabo o ile a tsamaya ho ya sekolong hoseng.,sotho_20250421_094806,sotho
+thutoea,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,2025-04-21 09:48:11,Thutoea ea bana e bohlokoa bakeng sa bokamoso ba naha ea rona.,sotho_20250421_094806,sotho
+makatsa,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,2025-04-21 09:48:12,Pula e nele ka tsela e makatsa ka ha e ne e le selemo.,sotho_20250421_094806,sotho
+kgathala,Yes,,Positive,Yes,,Yes,,negative,3,few-shot,2025-04-21 09:48:12,"Bana ba kgathala ho etsa mosebetsi wa sekolo, ba batla ho bapala feela.",sotho_20250421_094806,sotho
+monate,Yes,,Positive,Yes,,Yes,,positive,3,few-shot,2025-04-21 09:48:13,"Dijo tsa mme di monate haholo, ke ka hoo ke ratang ho ja lapeng.",sotho_20250421_094806,sotho
+ho hlonama,Yes,,Positive,Yes,,Yes,,negative,3,few-shot,2025-04-21 09:48:15,Ke ile ka ho hlonama haholo ha ke utlwa ka tshenyeho ya ntate wa hao.,sotho_20250421_094806,sotho
+boiketlo,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,2025-04-21 09:48:16,Batho ba bangata ba batla boiketlo ha ba kgetha dibaka tsa ho phomola.,sotho_20250421_094806,sotho
+mokgethwa,Yes,,Positive,Yes,,Yes,,neutral,1,zero-shot,2025-04-21 09:48:16,Mokgethwa o rapela kereke hoseng ho hong le ho hong.,sotho_20250421_094806,sotho
+lerato,Yes,,Positive,Yes,,Yes,,neutral,1,few-shot,2025-04-21 09:48:17,Lerato o ile a bula lebenkele la hae la dibuka motseng wa habo.,sotho_20250421_094806,sotho
+kgalefo,Yes,,Positive,Yes,,Yes,,negative,3,zero-shot,2025-04-21 09:48:17,"Monna eo o ile a otla ngwana wa hae ka kgalefo e kgolo, e leng ntho e sa amoheleheng ho hang.",sotho_20250421_094806,sotho
+bohloko,Yes,,Positive,Yes,,Yes,,negative,3,zero-shot,2025-04-21 09:48:18,Ke utlwile bohloko ha ke bona batho ba hlokang dijo le bodulo.,sotho_20250421_094806,sotho
