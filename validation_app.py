@@ -13,7 +13,7 @@ DATA_DIR = "data"
 PARTICIPANT_FILE = os.path.join(DATA_DIR, "participants.csv")
 ANSWERS_FILE_TEMPLATE = os.path.join(DATA_DIR, "answers_{language}.csv")
 AVAILABLE_LANGUAGES = ["sotho", "sepedi", "setswana"]
-WORDS_TO_SHOW = 18  # Number of words to randomly select from the full CSV
+WORDS_TO_SHOW = 18  # Exactly 18 words, no more, no less
 
 # --- Helper Functions ---
 def safe_literal_eval(val):
@@ -55,8 +55,8 @@ def initialize_state():
         if key not in st.session_state:
             st.session_state[key] = value
 
-def load_lexicon(language, num_words=WORDS_TO_SHOW):
-    """Load word list from CSV file and randomly select specified number of words"""
+def load_lexicon(language):
+    """Load exactly 18 random words from CSV file"""
     if not language:
         return pd.DataFrame(), "No language selected."
     
@@ -84,17 +84,16 @@ def load_lexicon(language, num_words=WORDS_TO_SHOW):
         
         full_df['intensity'] = pd.to_numeric(full_df.get('intensity', 0), errors='coerce').fillna(0).astype(int)
         
-        # Randomly select the specified number of words
-        if len(full_df) > num_words:
-            # Get random sample without replacement
-            selected_indices = random.sample(range(len(full_df)), num_words)
+        # CRITICAL: Force exactly 18 words - this is the key part
+        if len(full_df) > WORDS_TO_SHOW:
+            # Get exactly WORDS_TO_SHOW random words
+            selected_indices = random.sample(range(len(full_df)), WORDS_TO_SHOW)
             df = full_df.iloc[selected_indices].copy().reset_index(drop=True)
         else:
+            if len(full_df) < WORDS_TO_SHOW:
+                return pd.DataFrame(), f"CSV only contains {len(full_df)} words, but {WORDS_TO_SHOW} are required."
             df = full_df.copy()
-            # If we have fewer words than requested, use all of them
-            if len(df) < num_words:
-                st.warning(f"CSV contains only {len(df)} words, showing all available.")
-            
+        
         return df, None
     except Exception as e:
         return pd.DataFrame(), f"Error: {str(e)}"
@@ -289,10 +288,6 @@ elif st.session_state.app_stage == 'user_info':
             st.session_state.participant_id = f"{st.session_state.user_language}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
             
             if save_participant_info(st.session_state.participant_id, st.session_state.user_name, st.session_state.user_language):
-                # Remove caching to ensure fresh selection each time
-                if hasattr(st, 'cache_data'):
-                    st.cache_data.clear()
-                    
                 df, error_msg = load_lexicon(st.session_state.user_language)
                 
                 if error_msg:
@@ -300,11 +295,10 @@ elif st.session_state.app_stage == 'user_info':
                 elif df.empty:
                     st.error(f"No words found for {st.session_state.user_language}")
                 else:
-                    # Check the exact number of words after selection
-                    if len(df) != WORDS_TO_SHOW and len(df) > WORDS_TO_SHOW:
-                        # Force exactly WORDS_TO_SHOW if needed
-                        selected_indices = random.sample(range(len(df)), WORDS_TO_SHOW)
-                        df = df.iloc[selected_indices].copy().reset_index(drop=True)
+                    # Verify we have exactly 18 words
+                    if len(df) != WORDS_TO_SHOW:
+                        st.error(f"Error: Selected {len(df)} words instead of {WORDS_TO_SHOW}. Please contact the administrator.")
+                        st.stop()
                     
                     st.session_state.word_df = df
                     indices = list(df.index)
