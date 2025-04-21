@@ -145,11 +145,25 @@ def load_lexicon(language, num_words=WORDS_TO_SHOW):
         if not os.path.exists(filepath):
             return pd.DataFrame(), f"Cannot find {filename}"
         
+        # Read the first few lines for debugging
+        with open(filepath, 'r', encoding='utf-8') as f:
+            first_lines = [next(f) for _ in range(5) if f]
+        
+        st.write("CSV file preview:")
+        for i, line in enumerate(first_lines):
+            st.code(line, language=None)
+        
         # Try our completely manual CSV parser first (most robust)
         full_df = read_csv_manually(filepath)
         
+        # Debug information
+        st.write(f"Column names found: {list(full_df.columns)}")
+        
         # Normalize column names to handle case sensitivity
         full_df = normalize_column_names(full_df)
+        
+        # More debug info
+        st.write(f"Column names after normalization: {list(full_df.columns)}")
         
         # Fallbacks if needed (should be unnecessary with manual parser)
         if full_df.empty:
@@ -157,40 +171,52 @@ def load_lexicon(language, num_words=WORDS_TO_SHOW):
                 # Attempt with pandas and flexible quoting
                 full_df = pd.read_csv(filepath, quoting=csv.QUOTE_NONE, escapechar='\\')
                 full_df = normalize_column_names(full_df)
-            except:
+            except Exception as e:
+                st.error(f"Error with fallback method 1: {str(e)}")
                 try:
                     # Try with more permissive settings
                     full_df = pd.read_csv(filepath, on_bad_lines='skip')
                     full_df = normalize_column_names(full_df)
-                except:
+                except Exception as e:
+                    st.error(f"Error with fallback method 2: {str(e)}")
                     # Last resort
                     try:
                         full_df = pd.read_csv(filepath, error_bad_lines=False)
                         full_df = normalize_column_names(full_df)
-                    except:
+                    except Exception as e:
+                        st.error(f"Error with fallback method 3: {str(e)}")
                         return pd.DataFrame(), "Could not parse CSV file with any method"
         
         if full_df.empty:
             return pd.DataFrame(), "CSV file is empty or could not be parsed"
-            
+        
+        # Check and rename columns if needed
         if 'word' not in full_df.columns:
             # Try to identify a suitable column to use as 'word'
             possible_word_cols = [col for col in full_df.columns if 'word' in col.lower()]
+            st.write(f"Possible word columns: {possible_word_cols}")
+            
             if possible_word_cols:
                 word_col = possible_word_cols[0]
                 full_df = full_df.rename(columns={word_col: 'word'})
                 st.info(f"Using column '{word_col}' as the word column")
             else:
                 # If no suitable column found, use the first column
-                first_col = full_df.columns[0]
-                full_df = full_df.rename(columns={first_col: 'word'})
-                st.warning(f"No 'word' column found. Using first column '{first_col}' instead.")
+                if not full_df.empty and len(full_df.columns) > 0:
+                    first_col = full_df.columns[0]
+                    full_df = full_df.rename(columns={first_col: 'word'})
+                    st.warning(f"No 'word' column found. Using first column '{first_col}' instead.")
+                else:
+                    return pd.DataFrame(), "CSV has no usable columns"
         
         # Clean up data and ensure all required columns exist
         columns_to_check = ['word', 'meaning', 'sentiment', 'explanation']
         for col in columns_to_check:
             if col not in full_df.columns:
                 full_df[col] = ''
+        
+        # Final column check
+        st.write(f"Final columns: {list(full_df.columns)}")
         
         full_df['word'] = full_df['word'].fillna('').astype(str)
         full_df['meaning'] = full_df['meaning'].fillna('').astype(str)
@@ -205,11 +231,12 @@ def load_lexicon(language, num_words=WORDS_TO_SHOW):
             
         full_df['intensity'] = pd.to_numeric(full_df['intensity'], errors='coerce').fillna(0).astype(int)
         
-        # Display the column names for debugging
-        st.info(f"CSV columns found: {', '.join(full_df.columns.tolist())}")
-        
         # Remove rows with empty or missing words
         full_df = full_df[full_df['word'].notna() & (full_df['word'] != '')]
+        
+        # Display a sample of the data
+        st.write("Sample data from CSV:")
+        st.write(full_df.head(3))
         
         # Randomly select the specified number of words
         if len(full_df) > num_words:
@@ -224,6 +251,9 @@ def load_lexicon(language, num_words=WORDS_TO_SHOW):
             
         return df, None
     except Exception as e:
+        st.write("Error details for debugging:")
+        import traceback
+        st.code(traceback.format_exc())
         return pd.DataFrame(), f"Error loading lexicon: {str(e)}"
 
 def save_participant_info(pid, name, lang):
