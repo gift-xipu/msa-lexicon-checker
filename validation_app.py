@@ -111,6 +111,28 @@ def read_csv_manually(filepath):
         st.error(f"Error manually reading CSV: {str(e)}")
         return pd.DataFrame()
 
+def normalize_column_names(df):
+    """Normalize column names to handle case insensitivity and whitespace"""
+    # Create a mapping of normalized names to original names
+    col_map = {}
+    for col in df.columns:
+        normalized = col.lower().strip()
+        col_map[normalized] = col
+    
+    # Check for 'word' column in case-insensitive way
+    word_col = None
+    for norm_name, orig_name in col_map.items():
+        if norm_name == 'word' or norm_name == 'words' or 'word' in norm_name:
+            word_col = orig_name
+            break
+    
+    # If found, rename to standard 'word'
+    if word_col and word_col != 'word':
+        df = df.rename(columns={word_col: 'word'})
+        st.info(f"Renamed column '{word_col}' to 'word'")
+    
+    return df
+
 def load_lexicon(language, num_words=WORDS_TO_SHOW):
     """Load word list from CSV file with extra-robust error handling"""
     if not language:
@@ -126,19 +148,25 @@ def load_lexicon(language, num_words=WORDS_TO_SHOW):
         # Try our completely manual CSV parser first (most robust)
         full_df = read_csv_manually(filepath)
         
+        # Normalize column names to handle case sensitivity
+        full_df = normalize_column_names(full_df)
+        
         # Fallbacks if needed (should be unnecessary with manual parser)
         if full_df.empty:
             try:
                 # Attempt with pandas and flexible quoting
                 full_df = pd.read_csv(filepath, quoting=csv.QUOTE_NONE, escapechar='\\')
+                full_df = normalize_column_names(full_df)
             except:
                 try:
                     # Try with more permissive settings
                     full_df = pd.read_csv(filepath, on_bad_lines='skip')
+                    full_df = normalize_column_names(full_df)
                 except:
                     # Last resort
                     try:
                         full_df = pd.read_csv(filepath, error_bad_lines=False)
+                        full_df = normalize_column_names(full_df)
                     except:
                         return pd.DataFrame(), "Could not parse CSV file with any method"
         
@@ -146,7 +174,17 @@ def load_lexicon(language, num_words=WORDS_TO_SHOW):
             return pd.DataFrame(), "CSV file is empty or could not be parsed"
             
         if 'word' not in full_df.columns:
-            return pd.DataFrame(), "File missing 'word' column"
+            # Try to identify a suitable column to use as 'word'
+            possible_word_cols = [col for col in full_df.columns if 'word' in col.lower()]
+            if possible_word_cols:
+                word_col = possible_word_cols[0]
+                full_df = full_df.rename(columns={word_col: 'word'})
+                st.info(f"Using column '{word_col}' as the word column")
+            else:
+                # If no suitable column found, use the first column
+                first_col = full_df.columns[0]
+                full_df = full_df.rename(columns={first_col: 'word'})
+                st.warning(f"No 'word' column found. Using first column '{first_col}' instead.")
         
         # Clean up data and ensure all required columns exist
         columns_to_check = ['word', 'meaning', 'sentiment', 'explanation']
@@ -166,6 +204,12 @@ def load_lexicon(language, num_words=WORDS_TO_SHOW):
             full_df['intensity'] = 0
             
         full_df['intensity'] = pd.to_numeric(full_df['intensity'], errors='coerce').fillna(0).astype(int)
+        
+        # Display the column names for debugging
+        st.info(f"CSV columns found: {', '.join(full_df.columns.tolist())}")
+        
+        # Remove rows with empty or missing words
+        full_df = full_df[full_df['word'].notna() & (full_df['word'] != '')]
         
         # Randomly select the specified number of words
         if len(full_df) > num_words:
