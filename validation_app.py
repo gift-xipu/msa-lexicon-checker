@@ -48,13 +48,13 @@ def initialize_state():
         'current_word_idx_position': 0,
         'user_answers': [],
         'all_participants': pd.DataFrame(),
-        'all_answers': pd.DataFrame()
+        'all_answers': pd.DataFrame(),
+        'form_key': 0  # For forcing form re-creation and scroll to top
     }
     for key, value in defaults.items():
         if key not in st.session_state:
             st.session_state[key] = value
 
-@st.cache_data
 def load_lexicon(language, num_words=WORDS_TO_SHOW):
     """Load word list from CSV file and randomly select specified number of words"""
     if not language:
@@ -91,7 +91,10 @@ def load_lexicon(language, num_words=WORDS_TO_SHOW):
             df = full_df.iloc[selected_indices].copy().reset_index(drop=True)
         else:
             df = full_df.copy()
-        
+            # If we have fewer words than requested, use all of them
+            if len(df) < num_words:
+                st.warning(f"CSV contains only {len(df)} words, showing all available.")
+            
         return df, None
     except Exception as e:
         return pd.DataFrame(), f"Error: {str(e)}"
@@ -261,6 +264,7 @@ if st.query_params.get("admin") == "true":
     st.stop()
 
 # Main app
+# Always start with page title at top for anchoring
 st.title("Word Checker")
 
 # Step 1: Choose Language
@@ -285,13 +289,23 @@ elif st.session_state.app_stage == 'user_info':
             st.session_state.participant_id = f"{st.session_state.user_language}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
             
             if save_participant_info(st.session_state.participant_id, st.session_state.user_name, st.session_state.user_language):
-                df, error_msg = load_lexicon(st.session_state.user_language, WORDS_TO_SHOW)
+                # Remove caching to ensure fresh selection each time
+                if hasattr(st, 'cache_data'):
+                    st.cache_data.clear()
+                    
+                df, error_msg = load_lexicon(st.session_state.user_language)
                 
                 if error_msg:
                     st.error(error_msg)
                 elif df.empty:
                     st.error(f"No words found for {st.session_state.user_language}")
                 else:
+                    # Check the exact number of words after selection
+                    if len(df) != WORDS_TO_SHOW and len(df) > WORDS_TO_SHOW:
+                        # Force exactly WORDS_TO_SHOW if needed
+                        selected_indices = random.sample(range(len(df)), WORDS_TO_SHOW)
+                        df = df.iloc[selected_indices].copy().reset_index(drop=True)
+                    
                     st.session_state.word_df = df
                     indices = list(df.index)
                     random.shuffle(indices)
@@ -337,8 +351,9 @@ elif st.session_state.app_stage == 'validation':
     </div>
     """, unsafe_allow_html=True)
     
-    # Questions form
-    with st.form(key=f"form_{idx}"):
+    # Questions form - use unique form key for each submission to force rebuild
+    form_key = f"form_{idx}_{st.session_state.form_key}"
+    with st.form(key=form_key):
         # Q1: Meaning check
         q1 = st.radio(
             "Is the meaning correct?",
@@ -420,6 +435,8 @@ elif st.session_state.app_stage == 'validation':
                 success = save_answers([answer], st.session_state.user_language, st.session_state.participant_id)
                 
                 if success:
+                    # Update form key to force the form to rebuild and scroll to top
+                    st.session_state.form_key += 1
                     st.session_state.current_word_idx_position += 1
                     st.rerun()
                 else:
