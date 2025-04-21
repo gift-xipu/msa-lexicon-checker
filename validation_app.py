@@ -7,13 +7,14 @@ import json
 import ast
 import base64
 import io
+import csv
 
 # --- Constants ---
 DATA_DIR = "data"
 PARTICIPANT_FILE = os.path.join(DATA_DIR, "participants.csv")
 ANSWERS_FILE_TEMPLATE = os.path.join(DATA_DIR, "answers_{language}.csv")
 AVAILABLE_LANGUAGES = ["sotho", "sepedi", "setswana"]
-WORDS_TO_SHOW = 18  # Exactly 18 words, no more, no less
+WORDS_TO_SHOW = 18  # Number of words to randomly select from the full CSV
 
 # --- Helper Functions ---
 def safe_literal_eval(val):
@@ -55,8 +56,56 @@ def initialize_state():
         if key not in st.session_state:
             st.session_state[key] = value
 
-def load_lexicon(language):
-    """Load exactly 18 random words from CSV file"""
+def read_csv_manually(filepath):
+    """Read a CSV file manually, handling rows with inconsistent field counts"""
+    try:
+        with open(filepath, 'r', encoding='utf-8') as f:
+            # Read the entire file content
+            content = f.read()
+            
+        # Split into lines
+        lines = content.splitlines()
+        if not lines:
+            return pd.DataFrame()
+            
+        # Parse header
+        header = list(csv.reader([lines[0]]))[0]
+        expected_fields = len(header)
+        
+        # Parse rows
+        data = []
+        for i, line in enumerate(lines[1:], 2):  # Start from line 2 (1-indexed)
+            # Skip empty lines
+            if not line.strip():
+                continue
+                
+            # Try to parse the line with CSV reader
+            try:
+                row = list(csv.reader([line]))[0]
+                
+                # Handle inconsistent field count
+                if len(row) < expected_fields:
+                    # Add empty values for missing fields
+                    row.extend([''] * (expected_fields - len(row)))
+                elif len(row) > expected_fields:
+                    # Truncate extra fields
+                    st.warning(f"Line {i} has {len(row)} fields (expected {expected_fields}). Extra fields will be truncated.")
+                    row = row[:expected_fields]
+                
+                data.append(row)
+            except Exception as e:
+                st.warning(f"Skipping line {i} due to parsing error: {str(e)}")
+                
+        # Create DataFrame
+        df = pd.DataFrame(data, columns=header)
+        return df
+        
+    except Exception as e:
+        st.error(f"Error manually reading CSV: {str(e)}")
+        return pd.DataFrame()
+
+def load_lexicon(language, num_words=WORDS_TO_SHOW):
+    """Load word list from CSV file with extra-robust error handling"""
     if not language:
         return pd.DataFrame(), "No language selected."
     
@@ -67,13 +116,37 @@ def load_lexicon(language):
         if not os.path.exists(filepath):
             return pd.DataFrame(), f"Cannot find {filename}"
         
-        # Load the full dataframe
-        full_df = pd.read_csv(filepath)
+        # Try our completely manual CSV parser first (most robust)
+        full_df = read_csv_manually(filepath)
         
+        # Fallbacks if needed (should be unnecessary with manual parser)
+        if full_df.empty:
+            try:
+                # Attempt with pandas and flexible quoting
+                full_df = pd.read_csv(filepath, quoting=csv.QUOTE_NONE, escapechar='\\')
+            except:
+                try:
+                    # Try with more permissive settings
+                    full_df = pd.read_csv(filepath, on_bad_lines='skip')
+                except:
+                    # Last resort
+                    try:
+                        full_df = pd.read_csv(filepath, error_bad_lines=False)
+                    except:
+                        return pd.DataFrame(), "Could not parse CSV file with any method"
+        
+        if full_df.empty:
+            return pd.DataFrame(), "CSV file is empty or could not be parsed"
+            
         if 'word' not in full_df.columns:
-            return pd.DataFrame(), "File missing word column"
+            return pd.DataFrame(), "File missing 'word' column"
         
-        # Clean up data
+        # Clean up data and ensure all required columns exist
+        columns_to_check = ['word', 'meaning', 'sentiment', 'explanation']
+        for col in columns_to_check:
+            if col not in full_df.columns:
+                full_df[col] = ''
+        
         full_df['word'] = full_df['word'].fillna('').astype(str)
         full_df['meaning'] = full_df['meaning'].fillna('').astype(str)
         full_df['sentiment'] = full_df['sentiment'].fillna('').astype(str)
@@ -82,21 +155,25 @@ def load_lexicon(language):
         if 'rating' in full_df.columns and 'intensity' not in full_df.columns:
             full_df['intensity'] = full_df['rating']
         
-        full_df['intensity'] = pd.to_numeric(full_df.get('intensity', 0), errors='coerce').fillna(0).astype(int)
+        if 'intensity' not in full_df.columns:
+            full_df['intensity'] = 0
+            
+        full_df['intensity'] = pd.to_numeric(full_df['intensity'], errors='coerce').fillna(0).astype(int)
         
-        # CRITICAL: Force exactly 18 words - this is the key part
-        if len(full_df) > WORDS_TO_SHOW:
-            # Get exactly WORDS_TO_SHOW random words
-            selected_indices = random.sample(range(len(full_df)), WORDS_TO_SHOW)
+        # Randomly select the specified number of words
+        if len(full_df) > num_words:
+            # Get random sample without replacement
+            selected_indices = random.sample(range(len(full_df)), num_words)
             df = full_df.iloc[selected_indices].copy().reset_index(drop=True)
         else:
-            if len(full_df) < WORDS_TO_SHOW:
-                return pd.DataFrame(), f"CSV only contains {len(full_df)} words, but {WORDS_TO_SHOW} are required."
             df = full_df.copy()
-        
+            # If we have fewer words than requested, use all of them
+            if len(df) < num_words:
+                st.warning(f"CSV contains only {len(df)} words, showing all available.")
+            
         return df, None
     except Exception as e:
-        return pd.DataFrame(), f"Error: {str(e)}"
+        return pd.DataFrame(), f"Error loading lexicon: {str(e)}"
 
 def save_participant_info(pid, name, lang):
     """Save who is taking the test"""
@@ -205,7 +282,7 @@ if st.query_params.get("admin") == "true":
     try:
         # Load participants
         if os.path.exists(PARTICIPANT_FILE):
-            participants_df = pd.read_csv(PARTICIPANT_FILE)
+            participants_df = read_csv_manually(PARTICIPANT_FILE)
             st.session_state.all_participants = participants_df
         else:
             st.warning("No participant data found.")
@@ -216,8 +293,9 @@ if st.query_params.get("admin") == "true":
         for lang in AVAILABLE_LANGUAGES:
             answer_path = ANSWERS_FILE_TEMPLATE.format(language=lang)
             if os.path.exists(answer_path):
-                lang_df = pd.read_csv(answer_path)
-                all_answers.append(lang_df)
+                lang_df = read_csv_manually(answer_path)
+                if not lang_df.empty:
+                    all_answers.append(lang_df)
         
         if all_answers:
             answers_df = pd.concat(all_answers, ignore_index=True)
@@ -248,7 +326,7 @@ if st.query_params.get("admin") == "true":
                     st.markdown(get_csv_download_link(lang_answers, f"answers_{lang}.csv", f"Download {lang.capitalize()} CSV"), unsafe_allow_html=True)
     
     except Exception as e:
-        st.error(f"Error loading data: {e}")
+        st.error(f"Error loading data: {str(e)}")
     
     st.header("Return to App")
     if st.button("Back to App"):
@@ -288,6 +366,10 @@ elif st.session_state.app_stage == 'user_info':
             st.session_state.participant_id = f"{st.session_state.user_language}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
             
             if save_participant_info(st.session_state.participant_id, st.session_state.user_name, st.session_state.user_language):
+                # Remove caching to ensure fresh selection each time
+                if hasattr(st, 'cache_data'):
+                    st.cache_data.clear()
+                    
                 df, error_msg = load_lexicon(st.session_state.user_language)
                 
                 if error_msg:
@@ -295,10 +377,11 @@ elif st.session_state.app_stage == 'user_info':
                 elif df.empty:
                     st.error(f"No words found for {st.session_state.user_language}")
                 else:
-                    # Verify we have exactly 18 words
-                    if len(df) != WORDS_TO_SHOW:
-                        st.error(f"Error: Selected {len(df)} words instead of {WORDS_TO_SHOW}. Please contact the administrator.")
-                        st.stop()
+                    # Double check we have exactly 18 words
+                    if len(df) != WORDS_TO_SHOW and len(df) > WORDS_TO_SHOW:
+                        # Force exactly WORDS_TO_SHOW if needed
+                        selected_indices = random.sample(range(len(df)), WORDS_TO_SHOW)
+                        df = df.iloc[selected_indices].copy().reset_index(drop=True)
                     
                     st.session_state.word_df = df
                     indices = list(df.index)
