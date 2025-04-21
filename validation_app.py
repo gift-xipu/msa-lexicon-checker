@@ -13,6 +13,7 @@ DATA_DIR = "data"
 PARTICIPANT_FILE = os.path.join(DATA_DIR, "participants.csv")
 ANSWERS_FILE_TEMPLATE = os.path.join(DATA_DIR, "answers_{language}.csv")
 AVAILABLE_LANGUAGES = ["sotho", "sepedi", "setswana"]
+WORDS_TO_SHOW = 18  # Number of words to randomly select from the full CSV
 
 # --- Helper Functions ---
 def safe_literal_eval(val):
@@ -54,8 +55,8 @@ def initialize_state():
             st.session_state[key] = value
 
 @st.cache_data
-def load_lexicon(language):
-    """Load word list from CSV file"""
+def load_lexicon(language, num_words=WORDS_TO_SHOW):
+    """Load word list from CSV file and randomly select specified number of words"""
     if not language:
         return pd.DataFrame(), "No language selected."
     
@@ -66,23 +67,32 @@ def load_lexicon(language):
         if not os.path.exists(filepath):
             return pd.DataFrame(), f"Cannot find {filename}"
         
-        df = pd.read_csv(filepath)
+        # Load the full dataframe
+        full_df = pd.read_csv(filepath)
         
-        if 'word' not in df.columns:
+        if 'word' not in full_df.columns:
             return pd.DataFrame(), "File missing word column"
         
         # Clean up data
-        df['word'] = df['word'].fillna('').astype(str)
-        df['meaning'] = df['meaning'].fillna('').astype(str)
-        df['sentiment'] = df['sentiment'].fillna('').astype(str)
-        df['explanation'] = df['explanation'].fillna('').astype(str)
+        full_df['word'] = full_df['word'].fillna('').astype(str)
+        full_df['meaning'] = full_df['meaning'].fillna('').astype(str)
+        full_df['sentiment'] = full_df['sentiment'].fillna('').astype(str)
+        full_df['explanation'] = full_df['explanation'].fillna('').astype(str)
         
-        if 'rating' in df.columns and 'intensity' not in df.columns:
-            df['intensity'] = df['rating']
+        if 'rating' in full_df.columns and 'intensity' not in full_df.columns:
+            full_df['intensity'] = full_df['rating']
         
-        df['intensity'] = pd.to_numeric(df.get('intensity', 0), errors='coerce').fillna(0).astype(int)
+        full_df['intensity'] = pd.to_numeric(full_df.get('intensity', 0), errors='coerce').fillna(0).astype(int)
         
-        return df.copy(), None
+        # Randomly select the specified number of words
+        if len(full_df) > num_words:
+            # Get random sample without replacement
+            selected_indices = random.sample(range(len(full_df)), num_words)
+            df = full_df.iloc[selected_indices].copy().reset_index(drop=True)
+        else:
+            df = full_df.copy()
+        
+        return df, None
     except Exception as e:
         return pd.DataFrame(), f"Error: {str(e)}"
 
@@ -275,7 +285,7 @@ elif st.session_state.app_stage == 'user_info':
             st.session_state.participant_id = f"{st.session_state.user_language}_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
             
             if save_participant_info(st.session_state.participant_id, st.session_state.user_name, st.session_state.user_language):
-                df, error_msg = load_lexicon(st.session_state.user_language)
+                df, error_msg = load_lexicon(st.session_state.user_language, WORDS_TO_SHOW)
                 
                 if error_msg:
                     st.error(error_msg)
