@@ -145,11 +145,25 @@ def load_lexicon(language, num_words=WORDS_TO_SHOW):
         if not os.path.exists(filepath):
             return pd.DataFrame(), f"Cannot find {filename}"
         
+        # Read the first few lines for debugging
+        with open(filepath, 'r', encoding='utf-8') as f:
+            first_lines = [next(f) for _ in range(5) if f]
+        
+        st.write("CSV file preview:")
+        for i, line in enumerate(first_lines):
+            st.code(line, language=None)
+        
         # Try our completely manual CSV parser first (most robust)
         full_df = read_csv_manually(filepath)
         
+        # Debug information
+        st.write(f"Column names found: {list(full_df.columns)}")
+        
         # Normalize column names to handle case sensitivity
         full_df = normalize_column_names(full_df)
+        
+        # More debug info
+        st.write(f"Column names after normalization: {list(full_df.columns)}")
         
         # Fallbacks if needed (should be unnecessary with manual parser)
         if full_df.empty:
@@ -157,25 +171,31 @@ def load_lexicon(language, num_words=WORDS_TO_SHOW):
                 # Attempt with pandas and flexible quoting
                 full_df = pd.read_csv(filepath, quoting=csv.QUOTE_NONE, escapechar='\\')
                 full_df = normalize_column_names(full_df)
-            except:
+            except Exception as e:
+                st.error(f"Error with fallback method 1: {str(e)}")
                 try:
                     # Try with more permissive settings
                     full_df = pd.read_csv(filepath, on_bad_lines='skip')
                     full_df = normalize_column_names(full_df)
-                except:
+                except Exception as e:
+                    st.error(f"Error with fallback method 2: {str(e)}")
                     # Last resort
                     try:
                         full_df = pd.read_csv(filepath, error_bad_lines=False)
                         full_df = normalize_column_names(full_df)
-                    except:
+                    except Exception as e:
+                        st.error(f"Error with fallback method 3: {str(e)}")
                         return pd.DataFrame(), "Could not parse CSV file with any method"
         
         if full_df.empty:
             return pd.DataFrame(), "CSV file is empty or could not be parsed"
-            
+        
+        # Check and rename columns if needed
         if 'word' not in full_df.columns:
             # Try to identify a suitable column to use as 'word'
             possible_word_cols = [col for col in full_df.columns if 'word' in col.lower()]
+            st.write(f"Possible word columns: {possible_word_cols}")
+            
             if possible_word_cols:
                 word_col = possible_word_cols[0]
                 full_df = full_df.rename(columns={word_col: 'word'})
@@ -195,6 +215,9 @@ def load_lexicon(language, num_words=WORDS_TO_SHOW):
             if col not in full_df.columns:
                 full_df[col] = ''
         
+        # Final column check
+        st.write(f"Final columns: {list(full_df.columns)}")
+        
         full_df['word'] = full_df['word'].fillna('').astype(str)
         full_df['meaning'] = full_df['meaning'].fillna('').astype(str)
         full_df['sentiment'] = full_df['sentiment'].fillna('').astype(str)
@@ -211,6 +234,10 @@ def load_lexicon(language, num_words=WORDS_TO_SHOW):
         # Remove rows with empty or missing words
         full_df = full_df[full_df['word'].notna() & (full_df['word'] != '')]
         
+        # Display a sample of the data
+        st.write("Sample data from CSV:")
+        st.write(full_df.head(3))
+        
         # Randomly select the specified number of words
         if len(full_df) > num_words:
             # Get random sample without replacement
@@ -224,6 +251,9 @@ def load_lexicon(language, num_words=WORDS_TO_SHOW):
             
         return df, None
     except Exception as e:
+        st.write("Error details for debugging:")
+        import traceback
+        st.code(traceback.format_exc())
         return pd.DataFrame(), f"Error loading lexicon: {str(e)}"
 
 def save_participant_info(pid, name, lang):
@@ -251,7 +281,7 @@ def save_participant_info(pid, name, lang):
         return False
 
 def save_answers(answers, lang, pid):
-    """Save user responses with special handling for Sotho"""
+    """Save user responses"""
     if not answers:
         return False
     
@@ -266,55 +296,22 @@ def save_answers(answers, lang, pid):
         # Make sure data directory exists
         os.makedirs(DATA_DIR, exist_ok=True)
         
-        # Get the file path - ensure proper language name formatting
-        # "sotho" might be getting saved differently than "sepedi" and "setswana"
-        if lang.lower() == "sotho":
-            path = os.path.join(DATA_DIR, f"answers_sotho.csv")
-        else:
-            path = ANSWERS_FILE_TEMPLATE.format(language=lang)
+        # Get the file path
+        path = ANSWERS_FILE_TEMPLATE.format(language=lang)
         
         # Check if file exists to determine if we need headers
         exists = os.path.exists(path)
         
-        # Ensure data types are consistent
-        for col in df.columns:
-            if df[col].dtype == 'object':
-                df[col] = df[col].astype(str)
-                
-        # Save to CSV with explicit encoding
-        df.to_csv(path, mode='a', header=not exists, index=False, encoding='utf-8')
-        
-        # Create a backup copy just in case
-        backup_path = path + '.backup'
-        if not exists or not os.path.exists(backup_path):
-            df.to_csv(backup_path, index=False, encoding='utf-8')
-        else:
-            # Append to existing backup
-            existing_backup = pd.read_csv(backup_path, encoding='utf-8')
-            combined = pd.concat([existing_backup, df], ignore_index=True)
-            combined.to_csv(backup_path, index=False, encoding='utf-8')
+        # Save to CSV
+        df.to_csv(path, mode='a', header=not exists, index=False)
         
         # Also append to our in-memory collection
         st.session_state.all_answers = pd.concat([st.session_state.all_answers, df], ignore_index=True)
         
-        # Debug info
-        st.session_state[f'debug_saved_{lang}'] = st.session_state.get(f'debug_saved_{lang}', 0) + len(df)
-        
         return True
     except Exception as e:
-        st.error(f"Error saving answers for {lang}: {e}")
-        # Try alternative saving method
-        try:
-            fallback_path = os.path.join(DATA_DIR, f"answers_{lang}_fallback.csv")
-            # Save raw data as JSON to preserve structure
-            with open(fallback_path, 'a', encoding='utf-8') as f:
-                for answer in answers:
-                    json.dump(answer, f)
-                    f.write('\n')
-            return True
-        except Exception as fallback_error:
-            st.error(f"Fallback save failed: {fallback_error}")
-            return False
+        st.error(f"Error saving answers: {e}")
+        return False
 
 def get_csv_download_link(df, filename, link_text):
     """Generate a link to download the dataframe as a CSV file."""
@@ -358,148 +355,9 @@ st.markdown("""
 
 initialize_state()
 
-# Enhanced Admin Panel with Data Recovery
+# Admin panel (accessible via query parameter)
 if st.query_params.get("admin") == "true":
     st.title("Word Checker Admin Panel")
-    
-    # Add data recovery option
-    st.header("Data Recovery Options")
-    recovery_tab1, recovery_tab2 = st.tabs(["Session Data Recovery", "File System Check"])
-    
-    with recovery_tab1:
-        st.subheader("Recover Session Data")
-        st.write("This will attempt to extract any data from current session state")
-        
-        # Show session state answers
-        st.write("Current session answers:", len(st.session_state.get('user_answers', [])))
-        
-        # Add a button to extract all answers from session state
-        if st.button("Recover Current Session Data"):
-            if 'user_answers' in st.session_state and st.session_state.user_answers:
-                lang = st.session_state.get('user_language', 'unknown')
-                pid = st.session_state.get('participant_id', f'recovered_{datetime.datetime.now().strftime("%Y%m%d_%H%M%S")}')
-                if save_answers(st.session_state.user_answers, lang, pid):
-                    st.success(f"Successfully recovered {len(st.session_state.user_answers)} answers from session")
-                else:
-                    st.error("Failed to save recovered answers")
-            else:
-                st.warning("No answers found in current session")
-                
-        # Option to manually select language for recovered data
-        recovery_lang = st.selectbox(
-            "Select language for recovery",
-            AVAILABLE_LANGUAGES,
-            index=0
-        )
-        
-        # Option to check if any participants have missing answers
-        if st.button("Check for Missing Data"):
-            # Get participants
-            if os.path.exists(PARTICIPANT_FILE):
-                participants_df = read_csv_manually(PARTICIPANT_FILE)
-                
-                # Get answers by language
-                answer_counts = {}
-                missing_participants = []
-                
-                for lang in AVAILABLE_LANGUAGES:
-                    answer_path = ANSWERS_FILE_TEMPLATE.format(language=lang)
-                    if os.path.exists(answer_path):
-                        try:
-                            answers_df = read_csv_manually(answer_path)
-                            
-                            # Group by participant_id and count
-                            if 'participant_id' in answers_df.columns:
-                                participant_counts = answers_df.groupby('participant_id').size()
-                                
-                                # Find participants with this language but incomplete answers
-                                lang_participants = participants_df[participants_df['language'] == lang]['participant_id'].tolist()
-                                
-                                for pid in lang_participants:
-                                    if pid not in participant_counts.index:
-                                        missing_participants.append({
-                                            'participant_id': pid,
-                                            'language': lang,
-                                            'answers': 0
-                                        })
-                                    elif participant_counts[pid] < WORDS_TO_SHOW:
-                                        missing_participants.append({
-                                            'participant_id': pid,
-                                            'language': lang,
-                                            'answers': participant_counts[pid]
-                                        })
-                        except Exception as e:
-                            st.error(f"Error analyzing {lang} answers: {e}")
-                
-                if missing_participants:
-                    st.warning(f"Found {len(missing_participants)} participants with missing or incomplete data")
-                    st.dataframe(pd.DataFrame(missing_participants))
-                else:
-                    st.success("All participants have complete data")
-    
-    with recovery_tab2:
-        st.subheader("Check File System")
-        
-        # Function to scan directory for relevant files
-        def scan_directory(dir_path):
-            results = []
-            try:
-                for root, _, files in os.walk(dir_path):
-                    for file in files:
-                        if any(lang in file.lower() for lang in AVAILABLE_LANGUAGES) or "answers" in file.lower():
-                            filepath = os.path.join(root, file)
-                            file_size = os.path.getsize(filepath)
-                            mod_time = os.path.getmtime(filepath)
-                            mod_time_str = datetime.datetime.fromtimestamp(mod_time).strftime("%Y-%m-%d %H:%M:%S")
-                            
-                            results.append({
-                                "file": file,
-                                "path": filepath,
-                                "size": file_size,
-                                "modified": mod_time_str
-                            })
-            except Exception as e:
-                st.error(f"Error scanning directory: {e}")
-            
-            return results
-        
-        # Scan data directory
-        if st.button("Scan for Data Files"):
-            files = scan_directory(DATA_DIR)
-            if files:
-                st.write(f"Found {len(files)} relevant files:")
-                st.dataframe(pd.DataFrame(files))
-                
-                # Option to check file contents
-                selected_file = st.selectbox("Select a file to inspect", [f["file"] for f in files])
-                if selected_file:
-                    file_path = next((f["path"] for f in files if f["file"] == selected_file), None)
-                    if file_path:
-                        try:
-                            with open(file_path, 'r', encoding='utf-8') as f:
-                                content = f.read()
-                            
-                            # Preview file content
-                            st.text_area("File Preview (first 1000 characters)", content[:1000], height=200)
-                            
-                            # Try to load as CSV
-                            try:
-                                df = read_csv_manually(file_path)
-                                st.write(f"Successfully loaded as CSV with {len(df)} rows and {len(df.columns)} columns")
-                                st.dataframe(df.head())
-                                
-                                # Offer to fix or export this file
-                                if st.button(f"Export fixed version of {selected_file}"):
-                                    st.markdown(get_csv_download_link(df, f"fixed_{selected_file}", f"Download fixed {selected_file}"), unsafe_allow_html=True)
-                            except Exception as e:
-                                st.error(f"Could not load as CSV: {e}")
-                        except Exception as e:
-                            st.error(f"Error reading file: {e}")
-            else:
-                st.warning("No relevant files found")
-    
-    # Regular admin panel functionality
-    st.header("User Data")
     
     # Load all data from CSV files
     try:
@@ -516,65 +374,10 @@ if st.query_params.get("admin") == "true":
         for lang in AVAILABLE_LANGUAGES:
             answer_path = ANSWERS_FILE_TEMPLATE.format(language=lang)
             if os.path.exists(answer_path):
-                try:
-                    lang_df = read_csv_manually(answer_path)
-                    if not lang_df.empty:
-                        # Add language column if missing
-                        if 'language' not in lang_df.columns:
-                            lang_df['language'] = lang
-                        all_answers.append(lang_df)
-                        st.success(f"Loaded {len(lang_df)} answers for {lang}")
-                    else:
-                        st.warning(f"No data found in {answer_path}")
-                except Exception as e:
-                    st.error(f"Error loading {lang} answers: {e}")
-                    
-                    # Try alternate path for sotho specifically
-                    if lang.lower() == "sotho":
-                        alt_path = os.path.join(DATA_DIR, "answers_sotho.csv")
-                        if os.path.exists(alt_path) and alt_path != answer_path:
-                            try:
-                                alt_df = read_csv_manually(alt_path)
-                                if not alt_df.empty:
-                                    if 'language' not in alt_df.columns:
-                                        alt_df['language'] = 'sotho'
-                                    all_answers.append(alt_df)
-                                    st.success(f"Loaded {len(alt_df)} answers from alternate Sotho path")
-                            except Exception as alt_e:
-                                st.error(f"Error loading alternate Sotho file: {alt_e}")
+                lang_df = read_csv_manually(answer_path)
+                if not lang_df.empty:
+                    all_answers.append(lang_df)
         
-        # Look for any backup files
-        for lang in AVAILABLE_LANGUAGES:
-            backup_path = ANSWERS_FILE_TEMPLATE.format(language=lang) + '.backup'
-            if os.path.exists(backup_path):
-                try:
-                    backup_df = read_csv_manually(backup_path)
-                    if not backup_df.empty:
-                        st.info(f"Found backup file for {lang} with {len(backup_df)} answers")
-                        if 'language' not in backup_df.columns:
-                            backup_df['language'] = lang
-                            
-                        # Check if these answers are already in our dataset
-                        if all_answers:
-                            combined = pd.concat(all_answers, ignore_index=True)
-                            if 'participant_id' in backup_df.columns and 'word' in backup_df.columns:
-                                # Generate a key for comparison
-                                backup_df['comp_key'] = backup_df['participant_id'] + '_' + backup_df['word']
-                                combined['comp_key'] = combined['participant_id'] + '_' + combined['word']
-                                
-                                # Find unique answers in backup
-                                unique_backup = backup_df[~backup_df['comp_key'].isin(combined['comp_key'])]
-                                
-                                if not unique_backup.empty:
-                                    st.warning(f"Found {len(unique_backup)} unique answers in backup not in main data")
-                                    if st.button(f"Merge {lang} backup data"):
-                                        all_answers.append(unique_backup.drop(columns=['comp_key']))
-                                        st.success("Backup data merged")
-                                else:
-                                    st.success("All backup data is already in the main dataset")
-                except Exception as e:
-                    st.error(f"Error checking backup file for {lang}: {e}")
-                            
         if all_answers:
             answers_df = pd.concat(all_answers, ignore_index=True)
             st.session_state.all_answers = answers_df
@@ -592,30 +395,19 @@ if st.query_params.get("admin") == "true":
         st.header("All Answers")
         if not answers_df.empty:
             st.write(f"Total answers: {len(answers_df)}")
-            
-            # Summary by language
-            st.subheader("Summary by Language")
-            if 'language' in answers_df.columns:
-                language_counts = answers_df['language'].value_counts().reset_index()
-                language_counts.columns = ['Language', 'Answer Count']
-                st.table(language_counts)
-            
             st.dataframe(answers_df)
             st.markdown(get_csv_download_link(answers_df, "all_answers.csv", "Download All Answers CSV"), unsafe_allow_html=True)
             
             # Individual language downloads
             st.header("Download by Language")
             for lang in AVAILABLE_LANGUAGES:
-                if 'language' in answers_df.columns:
-                    lang_answers = answers_df[answers_df['language'] == lang]
-                    if not lang_answers.empty:
-                        st.markdown(f"**{lang.capitalize()}** ({len(lang_answers)} answers)")
-                        st.markdown(get_csv_download_link(lang_answers, f"answers_{lang}.csv", f"Download {lang.capitalize()} CSV"), unsafe_allow_html=True)
+                lang_answers = answers_df[answers_df['language'] == lang]
+                if not lang_answers.empty:
+                    st.markdown(f"**{lang.capitalize()}** ({len(lang_answers)} answers)")
+                    st.markdown(get_csv_download_link(lang_answers, f"answers_{lang}.csv", f"Download {lang.capitalize()} CSV"), unsafe_allow_html=True)
     
     except Exception as e:
-        st.error(f"Error loading data: {e}")
-        import traceback
-        st.code(traceback.format_exc(), language="python")
+        st.error(f"Error loading data: {str(e)}")
     
     st.header("Return to App")
     if st.button("Back to App"):
