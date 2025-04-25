@@ -400,7 +400,6 @@ st.markdown("""
         text-align: center;
         margin: 25px 0 10px 0; /* Adjust margins */
         padding: 10px;
-        background-color: #f8f9fa; /* Light background */
         border-radius: 8px;
         border: 1px solid #dee2e6; /* Subtle border */
     }
@@ -413,7 +412,6 @@ st.markdown("""
     }
     /* System info box */
     .system-info {
-        background-color: #e9ecef; /* Lighter gray background */
         color: #495057; /* Text color */
         padding: 15px;
         border-radius: 8px;
