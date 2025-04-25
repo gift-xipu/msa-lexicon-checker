@@ -396,7 +396,6 @@ st.markdown("""
     .word-display {
         font-size: 2.8rem; /* Slightly larger */
         font-weight: bold;
-        color: #2c3e50; /* Darker color */
         text-align: center;
         margin: 25px 0 10px 0; /* Adjust margins */
         padding: 10px;
@@ -406,13 +405,11 @@ st.markdown("""
     /* Meaning display styling */
     .meaning-display {
         font-size: 1.3rem; /* Slightly larger */
-        color: #555; /* Medium gray */
         text-align: center;
         margin-bottom: 25px;
     }
     /* System info box */
     .system-info {
-        color: #495057; /* Text color */
         padding: 15px;
         border-radius: 8px;
         margin-bottom: 25px;
